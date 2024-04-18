@@ -7,7 +7,6 @@ namespace EmulationKit.i8080.Commands.Call
 {
     internal abstract class CallBase : D16Command
     {
-        private readonly Func<ushort> _getPc;
         private readonly Action<ushort> _setPc;
         private readonly Action<ushort> _push;
         private readonly int _successCycles;
@@ -15,7 +14,6 @@ namespace EmulationKit.i8080.Commands.Call
         public CallBase(int cycles, int successCycles, IMemory memory, Action<ushort> incPc, Action<int> incCycles,
             Func<ushort> getPc, Action<ushort> setPc, Action<ushort> push) : base(cycles, memory, incPc, incCycles, getPc)
         {
-            _getPc = getPc;
             _setPc = setPc;
             _push = push;
             _successCycles = successCycles;

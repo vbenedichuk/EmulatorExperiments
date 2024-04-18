@@ -5,11 +5,11 @@ namespace EmulationKit.i8080.Commands
 {
     internal abstract class BaseCommand : ICpuCommand
     {
-        protected readonly Action<ushort> _incPc;
+        protected readonly Action<ushort>? _incPc;
         protected readonly Action<int> _incCycles;
         protected readonly ushort _opLength;
         public int _cycles;
-        public BaseCommand(int cycles, Action<ushort> incPc, Action<int> incCycles, ushort opLength = 1)
+        public BaseCommand(int cycles, Action<ushort>? incPc, Action<int> incCycles, ushort opLength = 1)
         {
             _incPc = incPc;
             _incCycles = incCycles;
@@ -19,8 +19,8 @@ namespace EmulationKit.i8080.Commands
 
         public virtual void Execute()
         {
-            _incCycles(_cycles);
-            _incPc(_opLength);
+            _incCycles?.Invoke(_cycles);
+            _incPc?.Invoke(_opLength);
         }
     }
 }
